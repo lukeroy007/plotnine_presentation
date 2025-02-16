@@ -70,26 +70,26 @@ For these reasons, **Plotnine is one of the best tools for data visualization**,
 ---
 
 
-# 🏙️ Part 2 - Plotnine visualization of NYC crash data
+# 🏙️ Part 2 - Plotnine Visualization of NYC Crash Data
+---
 
 ## 🚗 NYC Crash Data - Overview  
 This dataset contains records of **motor vehicle collisions in NYC**.  
 
-We will make use of:
-- **Date & time** of crashes
-- **Number of injuries**
-- **Borough where the crash happened**
+We will make use of:  
+- **Date & time** of crashes  
+- **Number of injuries**  
+- **Borough where the crash happened**  
 - **Primary contributing factor**  
+---
 
-break
+## **Step 1 - Data**  
+The **data** component is the foundation of every plot; it provides the information that will be visualized.  
 
-## Step 1 - Data  
-
-The **data** component is the foundation of every plot, it provides the information that will be visualized.  
-
-In Plotnine, the most common approach is to use a **Pandas DataFrame** as the data source. While other formats can work, **Pandas is the best practice** since Plotnine is built on top of it. These two libraries are designed to work efficiently together, making data manipulation and visualization hassle free. 
-
-break
+In Plotnine, the most common approach is to use a **Pandas DataFrame** as the data source.  
+While other formats can work, **Pandas is best practice** since Plotnine is built on top of it.  
+These two libraries are designed to work efficiently together, making data manipulation and visualization hassle-free.  
+---
 
 ```{python}
 import pandas as pd
@@ -98,11 +98,10 @@ import pandas as pd
 url = "https://raw.githubusercontent.com/statds/ids-s25/refs/heads/main/data/nyccrashes_2024w0630_by20250212.csv"
 df = pd.read_csv(url)
 
-# For ease of working
+# Standardize column names for easier use
 df.columns = df.columns.str.lower().str.replace(" ", "_")
 
-
-# Show first few rows + confirm everything worked😁
+# Show first few rows + confirm everything worked 😁
 df.head()
 
 ```
