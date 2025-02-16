@@ -66,6 +66,10 @@ import pandas as pd
 url = "https://raw.githubusercontent.com/statds/ids-s25/refs/heads/main/data/nyccrashes_2024w0630_by20250212.csv"
 df = pd.read_csv(url)
 
+# For ease of working
+df.columns = df.columns.str.lower().str.replace(" ", "_")
+
+
 # Show first few rows + confirm everything worked😁
 df.head()
 
@@ -82,7 +86,7 @@ To create a basic Plotnine visualization, we need to specify how raw data should
 from plotnine import ggplot, aes, geom_point
 
 # Basic scatter plot
-(ggplot(df, aes(x="date", y="injuries")) + geom_point())
+(ggplot(df, aes(x="crash_date", y="number_of_persons_injured")) + geom_point())
 
 # Breakdown of components:
 # ggplot = grammar of graphics plot
@@ -91,18 +95,109 @@ from plotnine import ggplot, aes, geom_point
 # geom_point = geometry (no argument creates a scatterplot)
 ```
 
-## Step 3 - Extracting further information
+## Step 3 - Fitting the Grammar of Graphics to our data
 
-Plotnine has a myriad of different options for visualizing data, and some ways are more informative and helpful than others.
+Plotnine has a myriad of different options for visualizing data, and some ways are more informative, helpful and visually pleasing than others
 
-Let's change the geometry of our plot, and aggregate total injuries to see if any new infomration is revealed
+Our first plot is basic and not very informative. Using a statistical transformation, along with a change in geometry could bring us closer to our goal
 
 ```{python}
-# Aggregate injuries per day
-df_daily = df.groupby("date").agg({"injuries": "sum"}).reset_index()
+# import all plotnine functions
+from plotnine import *
 
-# Line plot to show trends
-(ggplot(df_daily, aes(x="date", y="injuries")) + geom_line())
+# Aggregate injuries per day
+df_daily = df.groupby("crash_date").agg({"number_of_persons_injured": "sum"}).reset_index()
+
+# Bar plot to show trends
+(ggplot(df_daily, aes(x="crash_date", y="number_of_persons_injured")) + geom_bar(stat="identity"))
+
+# using the stat "indentity" command tells plotnine to use our computed data
+
+
+```
+
+
+## Step 4 - Enhancing Graphical aesthetics
+
+Our bar plot is better suited at conveying the information we are trying to extract from this data, however, it leaves much to be desired in terms of visual presentation.
+
+## Let's arrange the data by weekday instead of date
+
+```{python}
+
+# Ensure crash_date is in datetime format
+df["crash_date"] = pd.to_datetime(df["crash_date"])
+
+# Extract day of the week
+df["day_of_week"] = df["crash_date"].dt.day_name()
+
+# Count how many times each day appears
+day_counts = df["day_of_week"].value_counts().to_dict()  # Get counts as dictionary
+
+# Aggregate total injuries per day and then compute the average per occurrence
+df_weekly = df.groupby("day_of_week").agg({"number_of_persons_injured": "sum"}).reset_index()
+
+# Divide Sunday's injuries by 2 since it appears twice
+df_weekly["number_of_persons_injured"] = df_weekly.apply(
+    lambda row: row["number_of_persons_injured"] / day_counts[row["day_of_week"]],
+    axis=1
+)
+
+# Order days of the week correctly
+day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=day_order, ordered=True)
+
+```
+
+
+```{python}
+# Change X variable to day of the week instead of date
+
+(ggplot(df_weekly, aes(x="day_of_week", y="number_of_persons_injured")) + 
+ geom_bar(stat="identity"))
+
+
+```
+
+## The graph is still bland, let's add some colors
+```{python}
+
+(ggplot(df_weekly, aes(x="day_of_week", y="number_of_persons_injured", fill="day_of_week")) + 
+ geom_bar(stat="identity") +
+ scale_fill_brewer(type="qual", palette="Set1"))
+
+ # scale_fill is a color scaling command for qualitative data
+
+
+```
+
+## let's add a title and better axis labels, to make the graph easier to read
+```{python}
+
+# Bar plot of injuries per day of the week
+
+(ggplot(df_weekly, aes(x="day_of_week", y="number_of_persons_injured", fill="day_of_week")) + 
+ geom_bar(stat="identity") +
+ scale_fill_brewer(type="qual", palette="Set1") +labs(x="Days of the Week", y="Number of Injuries", title="Crash injuries reported for each weekday", fill="Days"))
+
+
+
+
+
+
+
+```
+
+## Final product
+```{python}
+# pro level visualization
+
+(ggplot(df_weekly, aes(x="day_of_week", y="number_of_persons_injured", fill="day_of_week")) + 
+ geom_bar(stat="identity") +
+ scale_fill_hue() +labs(x="Days of the Week", y="Number of Injuries", title="Crash injuries reported for each weekday", fill="Days") + theme_gray())
+
+#theme_gray is the default theme, I explicitly defined it to show formatting
+
 
 
 
