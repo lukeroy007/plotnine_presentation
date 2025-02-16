@@ -1,56 +1,74 @@
 ---
-title: "A Grammer of Graphics Primer with Plotnine"
+title: "A Grammar of Graphics Primer with Plotnine"
 author: "Luke Roy"
 format: revealjs
 ---
 
 # 📊 Part 1 - What is Grammar of Graphics?
-break
+---
 
-**The Grammar of Graphics is a logically consistent language and set of rules for creating statistical graphics.**
+**The Grammar of Graphics is a logically consistent language and set of rules for creating statistical graphics.**  
 
-**It provides a structured way to build visualizations by breaking them down into independent components.**
+**It provides a structured way to build visualizations by breaking them down into independent components.**  
+---
 
-break
+## 🏗️ Grammar of Graphics Components  
+---
+
+Each plot in **Plotnine (Python's ggplot equivalent)** consists of the following core components:  
+---
+
+### **📊 Data**  
+What you're visualizing; the foundation of all GG plots.  
+---
+
+### **🎨 Aesthetics**  
+**`aes`** → Defines how data values are **mapped** to visual properties (e.g., x, y, color, size, shape).   
+---
+
+### **📐 Geometry (`geom_*`)**  
+The type of plot (**points, lines, bars, histograms, violins, etc.**).  
+---
+
+### **🖼 Facets**  
+**`facet_*`** → Splits the data into **small multiples** (subset/display of multiple graphs).    
+---
+
+### **📈 Statistics (`stat_*`)**  
+Computed summaries (**aggregations, density estimates, trend lines**).  
+---
+
+### **🎛 Scales (`scale_*`)**  
+**Axis transformations, color mapping, legend formatting**.  
+---
+
+### **🗺 Coordinates (`coord_*`)**  
+Different coordinate systems (**polar, cartesian, flipped**).  
+---
+
+### **🎨 Theme**  
+**`theme_*`** → Controls how **non-data elements** (titles, grids, labels, backgrounds) will look.  
 
 ---
 
-## 🏗️ Grammar of Graphics Components
-
-break
-
-Each plot in **Plotnine (Python's ggplot equivalent)** consists of the following core components:
-
-break
-each point is its own slide
-
-- **📊 Data** – What you're visualizing; the foundation of all GG plots.
-- **🎨 Aesthetics (`aes`)** – How data values are **mapped** to visual properties (e.g., x, y, color, size, shape).
-- **📐 Geometry (`geom_*`)** – The type of plot (**points, lines, bars, histograms, violins, etc.**).
-- **🖼 Facets (`facet_*`)** – Splitting the data into **small multiples** (subset/display of multiple graphs).
-- **📈 Statistics (`stat_*`)** – Computed summaries (**aggregations, density estimates, trend lines**).
-- **🎛 Scales (`scale_*`)** – **Axis transformations, color mapping, legend formatting**.
-- **🗺 Coordinates (`coord_*`)** – Different coordinate systems (**polar, cartesian, flipped**).
-- **🎨 Theme (`theme_*`)** – Controls how **non-data elements** (titles, grids, labels, backgrounds) will look.
-
+✅ **By combining these elements, we can create nearly any statistical visualization!**  
 ---
-break
 
-✅ **By combining these elements, we can create nearly any statistical visualization!** 
-break
+## **Why Use Plotnine?**  
+While Python offers powerful visualization libraries like **Matplotlib, Seaborn, and Plotly**, each with its own strengths, **Plotnine stands out** because it is built entirely on the **Grammar of Graphics framework**.  
 
-While Python offers powerful visualization libraries like **Matplotlib, Seaborn, and Plotly**, each with its own strengths, **Plotnine stands out** because it is built entirely on the **Grammar of Graphics framework**. This provides:  
+### **Why does this matter?**  
 - **A standardized, layered approach** to visualization.  
 - **Elegant and sophisticated visuals** with minimal code.  
 - **Better flexibility for complex statistical graphics** without excessive customization.  
+---
 
 For these reasons, **Plotnine is one of the best tools for data visualization**, especially when working with structured datasets and statistical analyses.  
+---
 
-break
+### **Next: Let’s Build a Plotnine Visualization! 🚗💥**
+---
 
-In the next section, we’ll start building a **step-by-step Plotnine visualization** using NYC crash data. 🚗💥
-
-break
 
 # 🏙️ Part 2 - Plotnine visualization of NYC crash data
 
