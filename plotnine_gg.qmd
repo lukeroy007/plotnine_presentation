@@ -246,7 +246,6 @@ display above code then display graph
 
 (ggplot(df, aes(x="crash_date", y="number_of_persons_injured")) + geom_point())
 
-{.no-code}
 ```
 
 
