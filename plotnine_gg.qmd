@@ -1,7 +1,10 @@
 ---
 title: "A Grammar of Graphics Primer with Plotnine"
 author: "Luke Roy"
-format: revealjs
+format: 
+    revealjs:
+        code-overflow: wrap
+
 ---
 
 # 📊 Part 1 - What is Grammar of Graphics?
@@ -80,7 +83,7 @@ We will make use of:
 - **Date & time** of crashes  
 - **Number of injuries**  
 - **Borough where the crash happened**  
-- **Primary contributing factor**  
+
 ---
 
 ## **Step 1 - Data**  
@@ -185,8 +188,9 @@ df_weekly["number_of_persons_injured"] = df_weekly.apply(
 day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=day_order, ordered=True)
 
-```
 {.hidden}
+```
+
 
 ```{python}
 # Change X variable to day of the week instead of date
@@ -242,9 +246,9 @@ display above code then display graph
 
 (ggplot(df, aes(x="crash_date", y="number_of_persons_injured")) + geom_point())
 
-
-```
 {.no-code}
+```
+
 
 ## Final product
 ---
@@ -301,9 +305,9 @@ df_borough["day_of_week"] = pd.Categorical(df_borough["day_of_week"], categories
 
 
 
-
-```
 {.hidden}
+```
+
 
 ## With Faceting, we can display multiple graphs, to easily compare and contrast
 
@@ -329,7 +333,7 @@ df_borough["day_of_week"] = pd.Categorical(df_borough["day_of_week"], categories
 ```
 
 
-# Conclusion - Plotnine and Grammar of Graphics
+## Conclusion - Plotnine and Grammar of Graphics
 
 Plotnine is a powerful grammar of graphics based visualization tool.
 
