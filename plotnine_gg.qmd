@@ -109,13 +109,12 @@ df.head()
 break
 
 ## Step 2 - Creating a Basic Grammar of Graphics Plot  
+---
 
 Plotnine syntax is structured **like a mathematical formula**—you define the **Grammar of Graphics components** and combine them using the **`+` operator**.  
 
-To create a basic Plotnine visualization, we need to specify how raw data should be translated into graphical elements.
-
-break
-
+To create a basic Plotnine visualization, we need to specify how raw data should be translated into graphical elements.  
+---
 
 ```{python}
 from plotnine import ggplot, aes, geom_point
@@ -130,18 +129,17 @@ from plotnine import ggplot, aes, geom_point
 # geom_point = geometry (no argument creates a scatterplot)
 ```
 
-break
+## Step 3 - Fitting the Grammar of Graphics to Our Data  
+---
 
-## Step 3 - Fitting the Grammar of Graphics to our data
+Plotnine offers many options for visualizing data, and some are more **informative, helpful, and visually appealing** than others.  
 
-Plotnine has a myriad of different options for visualizing data, and some ways are more informative, helpful and visually pleasing than others
-
-Our first plot is basic and not very informative. Using a statistical transformation, along with a change in geometry could bring us closer to our goal
-
-break
+Our first plot is **basic and not very insightful**.  
+By applying a **statistical transformation** and changing the **geometry**, we can **better represent the data**.  
+---
 
 ```{python}
-# import all plotnine functions
+# Import all plotnine functions
 from plotnine import *
 
 # Aggregate injuries per day
@@ -150,25 +148,21 @@ df_daily = df.groupby("crash_date").agg({"number_of_persons_injured": "sum"}).re
 # Bar plot to show trends
 (ggplot(df_daily, aes(x="crash_date", y="number_of_persons_injured")) + geom_bar(stat="identity"))
 
-# using the stat "indentity" command tells plotnine to use our computed data
-
+# Using stat="identity" tells Plotnine to use our computed data without further aggregation
 
 ```
 
-break
+## Step 4 - Enhancing Graphical Aesthetics  
+---
 
-## Step 4 - Enhancing Graphical aesthetics
+Our bar plot is better suited for conveying the information we are trying to extract from this data.  
+However, it **leaves much to be desired** in terms of **visual presentation**.  
+---
 
-Our bar plot is better suited at conveying the information we are trying to extract from this data, however, it leaves much to be desired in terms of visual presentation.
-
-break
-
-## Let's arrange the data by weekday instead of date
-
-break
+## Let's Arrange the Data by Weekday Instead of Date  
+---
 
 ```{python}
-
 # Ensure crash_date is in datetime format
 df["crash_date"] = pd.to_datetime(df["crash_date"])
 
@@ -192,8 +186,7 @@ day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
 df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=day_order, ordered=True)
 
 ```
-
-dont display above code
+{.hidden}
 
 ```{python}
 # Change X variable to day of the week instead of date
@@ -203,13 +196,13 @@ dont display above code
 
 
 ```
-display above code
-break 
-display graph
+
+---
 
 ## The graph is still bland, let's add some colors
 
-break
+---
+
 ```{python}
 
 (ggplot(df_weekly, aes(x="day_of_week", y="number_of_persons_injured", fill="day_of_week")) + 
@@ -224,7 +217,7 @@ display above code then display graph
 
 ## let's add a title and better axis labels, to make the graph easier to read
 
-break
+---
 
 ```{python}
 
@@ -241,19 +234,20 @@ break
 
 
 ```
-display code then graph
+
 
 ## First graph
-break
+
 ```{python}
 
 (ggplot(df, aes(x="crash_date", y="number_of_persons_injured")) + geom_point())
 
 
 ```
-dont display code, display graph
+{.no-code}
+
 ## Final product
-break
+---
 ```{python}
 # pro level visualization
 
@@ -267,15 +261,16 @@ break
 
 
 ```
-display graph then code
 
-break
+---
 
-## Part N - Extracting further information from data
+## Part N - Extracting Further Information from Data  
+---
 
-We created a nice looking plot, but this dataset has much more useful information to uncover. You can take this step to the nth degree, and create visualizations to answer whatever questions you want!
+### We created a nice-looking plot, but this dataset has **much more useful information** to uncover.  
 
-break
+### You can take this step **to the nth degree**, creating visualizations to **answer any questions** you want!  
+---
 
 ```{python}
 # Ensure crash_date is in datetime format
@@ -308,11 +303,12 @@ df_borough["day_of_week"] = pd.Categorical(df_borough["day_of_week"], categories
 
 
 ```
-Dont display above code 
+{.hidden}
 
 ## With Faceting, we can display multiple graphs, to easily compare and contrast
 
-break
+---
+
 ```{python}
 
 (ggplot(df_borough, aes(x="day_of_week", y="number_of_persons_injured", fill="day_of_week")) + 
@@ -331,7 +327,7 @@ break
 
 
 ```
-show above code and graph
+
 
 # Conclusion - Plotnine and Grammar of Graphics
 
@@ -341,9 +337,10 @@ With it you can create beautiful, informative and profession looking plots.
 
 Thank you for listening to my presentation.
 
-break
+---
+
 
 
 # Questions?
 
-done
+---
