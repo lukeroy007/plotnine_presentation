@@ -4,6 +4,8 @@ author: "Luke Roy"
 format: 
     revealjs:
         code-overflow: wrap
+        code-block-bg: true
+
 
 ---
 
