@@ -165,7 +165,7 @@ However, it **leaves much to be desired** in terms of **visual presentation**.
 ## Let's Arrange the Data by Weekday Instead of Date  
 ---
 
-```{python}
+```{python hidden=true}
 # Ensure crash_date is in datetime format
 df["crash_date"] = pd.to_datetime(df["crash_date"])
 
@@ -188,7 +188,7 @@ df_weekly["number_of_persons_injured"] = df_weekly.apply(
 day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=day_order, ordered=True)
 
-{.hidden}
+
 ```
 
 
@@ -276,7 +276,7 @@ display above code then display graph
 ### You can take this step **to the nth degree**, creating visualizations to **answer any questions** you want!  
 ---
 
-```{python}
+```{python hidden=true}
 # Ensure crash_date is in datetime format
 df["crash_date"] = pd.to_datetime(df["crash_date"])
 
@@ -305,7 +305,7 @@ df_borough["day_of_week"] = pd.Categorical(df_borough["day_of_week"], categories
 
 
 
-{.hidden}
+
 ```
 
 
