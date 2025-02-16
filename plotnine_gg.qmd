@@ -5,16 +5,24 @@ format: revealjs
 ---
 
 # 📊 Part 1 - What is Grammar of Graphics?
+break
 
 **The Grammar of Graphics is a logically consistent language and set of rules for creating statistical graphics.**
 
 **It provides a structured way to build visualizations by breaking them down into independent components.**
 
+break
+
 ---
 
-## 🏗️ GG Components
+## 🏗️ Grammar of Graphics Components
+
+break
 
 Each plot in **Plotnine (Python's ggplot equivalent)** consists of the following core components:
+
+break
+each point is its own slide
 
 - **📊 Data** – What you're visualizing; the foundation of all GG plots.
 - **🎨 Aesthetics (`aes`)** – How data values are **mapped** to visual properties (e.g., x, y, color, size, shape).
@@ -26,8 +34,10 @@ Each plot in **Plotnine (Python's ggplot equivalent)** consists of the following
 - **🎨 Theme (`theme_*`)** – Controls how **non-data elements** (titles, grids, labels, backgrounds) will look.
 
 ---
+break
 
 ✅ **By combining these elements, we can create nearly any statistical visualization!** 
+break
 
 While Python offers powerful visualization libraries like **Matplotlib, Seaborn, and Plotly**, each with its own strengths, **Plotnine stands out** because it is built entirely on the **Grammar of Graphics framework**. This provides:  
 - **A standardized, layered approach** to visualization.  
@@ -36,12 +46,13 @@ While Python offers powerful visualization libraries like **Matplotlib, Seaborn,
 
 For these reasons, **Plotnine is one of the best tools for data visualization**, especially when working with structured datasets and statistical analyses.  
 
-
+break
 
 In the next section, we’ll start building a **step-by-step Plotnine visualization** using NYC crash data. 🚗💥
 
-# 🏙️ Part 2 - Plotnine visualization of NYC crash data
+break
 
+# 🏙️ Part 2 - Plotnine visualization of NYC crash data
 
 ## 🚗 NYC Crash Data - Overview  
 This dataset contains records of **motor vehicle collisions in NYC**.  
@@ -52,12 +63,15 @@ We will make use of:
 - **Borough where the crash happened**
 - **Primary contributing factor**  
 
+break
+
 ## Step 1 - Data  
 
 The **data** component is the foundation of every plot, it provides the information that will be visualized.  
 
 In Plotnine, the most common approach is to use a **Pandas DataFrame** as the data source. While other formats can work, **Pandas is the best practice** since Plotnine is built on top of it. These two libraries are designed to work efficiently together, making data manipulation and visualization hassle free. 
 
+break
 
 ```{python}
 import pandas as pd
@@ -75,11 +89,15 @@ df.head()
 
 ```
 
+break
+
 ## Step 2 - Creating a Basic Grammar of Graphics Plot  
 
 Plotnine syntax is structured **like a mathematical formula**—you define the **Grammar of Graphics components** and combine them using the **`+` operator**.  
 
-To create a basic Plotnine visualization, we need to specify how raw data should be translated into graphical elements.  
+To create a basic Plotnine visualization, we need to specify how raw data should be translated into graphical elements.
+
+break
 
 
 ```{python}
@@ -95,11 +113,15 @@ from plotnine import ggplot, aes, geom_point
 # geom_point = geometry (no argument creates a scatterplot)
 ```
 
+break
+
 ## Step 3 - Fitting the Grammar of Graphics to our data
 
 Plotnine has a myriad of different options for visualizing data, and some ways are more informative, helpful and visually pleasing than others
 
 Our first plot is basic and not very informative. Using a statistical transformation, along with a change in geometry could bring us closer to our goal
+
+break
 
 ```{python}
 # import all plotnine functions
@@ -116,12 +138,17 @@ df_daily = df.groupby("crash_date").agg({"number_of_persons_injured": "sum"}).re
 
 ```
 
+break
 
 ## Step 4 - Enhancing Graphical aesthetics
 
 Our bar plot is better suited at conveying the information we are trying to extract from this data, however, it leaves much to be desired in terms of visual presentation.
 
+break
+
 ## Let's arrange the data by weekday instead of date
+
+break
 
 ```{python}
 
@@ -149,6 +176,7 @@ df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=d
 
 ```
 
+dont display above code
 
 ```{python}
 # Change X variable to day of the week instead of date
@@ -158,8 +186,13 @@ df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=d
 
 
 ```
+display above code
+break 
+display graph
 
 ## The graph is still bland, let's add some colors
+
+break
 ```{python}
 
 (ggplot(df_weekly, aes(x="day_of_week", y="number_of_persons_injured", fill="day_of_week")) + 
@@ -170,8 +203,12 @@ df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=d
 
 
 ```
+display above code then display graph
 
 ## let's add a title and better axis labels, to make the graph easier to read
+
+break
+
 ```{python}
 
 # Bar plot of injuries per day of the week
@@ -187,8 +224,19 @@ df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=d
 
 
 ```
+display code then graph
 
+## First graph
+break
+```{python}
+
+(ggplot(df, aes(x="crash_date", y="number_of_persons_injured")) + geom_point())
+
+
+```
+dont display code, display graph
 ## Final product
+break
 ```{python}
 # pro level visualization
 
@@ -202,3 +250,83 @@ df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=d
 
 
 ```
+display graph then code
+
+break
+
+## Part N - Extracting further information from data
+
+We created a nice looking plot, but this dataset has much more useful information to uncover. You can take this step to the nth degree, and create visualizations to answer whatever questions you want!
+
+break
+
+```{python}
+# Ensure crash_date is in datetime format
+df["crash_date"] = pd.to_datetime(df["crash_date"])
+
+# Extract day of the week
+df["day_of_week"] = df["crash_date"].dt.day_name()
+
+# Remove rows where borough is NaN
+df = df.dropna(subset=["borough"])
+
+# Count how many times each day appears (Sunday appears twice)
+day_counts = df["day_of_week"].value_counts().to_dict()
+
+# Aggregate injuries by borough and day of the week
+df_borough = df.groupby(["borough", "day_of_week"]).agg({"number_of_persons_injured": "sum"}).reset_index()
+
+# Apply the Sunday fix to borough-level data
+df_borough["number_of_persons_injured"] = df_borough.apply(
+    lambda row: row["number_of_persons_injured"] / day_counts[row["day_of_week"]],
+    axis=1
+)
+
+# Ensure days are ordered correctly
+day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+df_borough["day_of_week"] = pd.Categorical(df_borough["day_of_week"], categories=day_order, ordered=True)
+
+
+
+
+
+```
+Dont display above code 
+
+## With Faceting, we can display multiple graphs, to easily compare and contrast
+
+break
+```{python}
+
+(ggplot(df_borough, aes(x="day_of_week", y="number_of_persons_injured", fill="day_of_week")) + 
+ geom_bar(stat="identity") +
+ facet_wrap("~borough") +  
+ scale_fill_brewer(type="qual", palette="Set1") + 
+ labs(
+     x="Days of the Week", 
+     y="Number of Injuries", 
+     title="Crash Injuries by Day of the Week in Each Borough", 
+     fill="Days"
+ ) +
+ theme_light()+ theme(axis_text_x=element_blank())) 
+
+
+
+
+```
+show above code and graph
+
+# Conclusion - Plotnine and Grammar of Graphics
+
+Plotnine is a powerful grammar of graphics based visualization tool.
+
+With it you can create beautiful, informative and profession looking plots.
+
+Thank you for listening to my presentation.
+
+break
+
+
+# Questions?
+
+done
