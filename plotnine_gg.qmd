@@ -1,0 +1,9 @@
+---
+title: "A Grammer of Graphics Primer with Plotnine"
+author: "Luke Roy"
+format: revealjs
+---
+
+
+
+
