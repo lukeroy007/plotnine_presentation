@@ -123,7 +123,9 @@ Plotnine syntax is structured **like a mathematical formula**—you define the *
 To create a basic Plotnine visualization, we need to specify how raw data should be translated into graphical elements.  
 ---
 
-```{python, layout: 'slide'}
+```{python}
+#| output-location: slide
+
 from plotnine import ggplot, aes, geom_point
 
 # Basic scatter plot
