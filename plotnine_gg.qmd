@@ -128,6 +128,7 @@ To create a basic Plotnine visualization, we need to specify how raw data should
 
 ```{python}
 #| output-location: slide
+#| code-wrap: true
 
 from plotnine import ggplot, aes, geom_point
 
@@ -153,6 +154,7 @@ By applying a **statistical transformation** and changing the **geometry**, we c
 
 ```{python}
 #| output-location: slide
+#| code-wrap: true
 # Import all plotnine functions
 from plotnine import *
 
@@ -206,6 +208,7 @@ df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=d
 
 ```{python}
 #| output-location: slide
+#| code-overflow: wrap
 # Change X variable to day of the week instead of date
 
 (ggplot(df_weekly, aes(x="day_of_week", y="number_of_persons_injured")) + 
