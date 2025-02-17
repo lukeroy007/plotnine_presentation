@@ -5,7 +5,10 @@ format:
     revealjs:
         code-overflow: wrap
         code-block-bg: true
+        code-copy: true
 
+execute: 
+  echo: true
 
 ---
 
