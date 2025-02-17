@@ -233,7 +233,7 @@ df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=d
 ```
 
 
-## let's add a title and better axis labels, to make the graph easier to read
+## Let's add a title and better axis labels, to make the graph easier to read
 
 ---
 
