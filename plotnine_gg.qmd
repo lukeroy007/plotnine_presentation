@@ -138,7 +138,6 @@ from plotnine import ggplot, aes, geom_point
 # geom_point = geometry (no argument creates a scatterplot)
 ```
 
-(ggplot(df, aes(x="crash_date", y="number_of_persons_injured")) + geom_point())
 
 ## Step 3 - Fitting the Grammar of Graphics to Our Data  
 
@@ -150,6 +149,7 @@ By applying a **statistical transformation** and changing the **geometry**, we c
 ---
 
 ```{python}
+#| output-location: slide
 # Import all plotnine functions
 from plotnine import *
 
@@ -173,7 +173,8 @@ However, it **leaves much to be desired** in terms of **visual presentation**.
 ## Let's Arrange the Data by Weekday Instead of Date  
 ---
 
-```{python hidden=true}
+```{python}
+#| echo: false
 # Ensure crash_date is in datetime format
 df["crash_date"] = pd.to_datetime(df["crash_date"])
 
@@ -201,6 +202,7 @@ df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=d
 
 
 ```{python}
+#| output-location: slide
 # Change X variable to day of the week instead of date
 
 (ggplot(df_weekly, aes(x="day_of_week", y="number_of_persons_injured")) + 
@@ -211,11 +213,12 @@ df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=d
 
 ---
 
-## The graph is still bland, let's add some colors
+## Let's add color to our graph
 
 ---
 
 ```{python}
+#| output-location: slide
 
 (ggplot(df_weekly, aes(x="day_of_week", y="number_of_persons_injured", fill="day_of_week")) + 
  geom_bar(stat="identity") +
@@ -225,13 +228,14 @@ df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=d
 
 
 ```
-display above code then display graph
+
 
 ## let's add a title and better axis labels, to make the graph easier to read
 
 ---
 
 ```{python}
+#| output-location: slide
 
 # Bar plot of injuries per day of the week
 
@@ -251,6 +255,8 @@ display above code then display graph
 ## First graph
 
 ```{python}
+#| output-location: slide
+#| echo: false
 
 (ggplot(df, aes(x="crash_date", y="number_of_persons_injured")) + geom_point())
 
@@ -260,6 +266,8 @@ display above code then display graph
 ## Final product
 ---
 ```{python}
+#| output-location: slide
+
 # pro level visualization
 
 (ggplot(df_weekly, aes(x="day_of_week", y="number_of_persons_injured", fill="day_of_week")) + 
@@ -283,7 +291,8 @@ display above code then display graph
 ### You can take this step **to the nth degree**, creating visualizations to **answer any questions** you want!  
 ---
 
-```{python hidden=true}
+```{python}
+#| echo: false
 # Ensure crash_date is in datetime format
 df["crash_date"] = pd.to_datetime(df["crash_date"])
 
@@ -321,6 +330,7 @@ df_borough["day_of_week"] = pd.Categorical(df_borough["day_of_week"], categories
 ---
 
 ```{python}
+#| output-location: slide
 
 (ggplot(df_borough, aes(x="day_of_week", y="number_of_persons_injured", fill="day_of_week")) + 
  geom_bar(stat="identity") +
