@@ -104,7 +104,6 @@ These two libraries are designed to work efficiently together, making data manip
 ---
 
 
-:::{cell}
 ```{python}
 import pandas as pd
 
