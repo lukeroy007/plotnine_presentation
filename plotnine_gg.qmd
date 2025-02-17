@@ -8,13 +8,7 @@ format:
         code-block-bg: true
         code-copy: true
 
-include-before-body:
-  text: |
-    \RecustomVerbatimEnvironment{verbatim}{Verbatim}{
-      showspaces = false,
-      showtabs = false,
-      breaksymbolleft={},
-      breaklines
+
         
 
 execute: 
