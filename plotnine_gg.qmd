@@ -103,6 +103,8 @@ While other formats can work, **Pandas is best practice** since Plotnine is buil
 These two libraries are designed to work efficiently together, making data manipulation and visualization hassle-free.  
 ---
 
+
+:::{cell}
 ```{python}
 import pandas as pd
 
