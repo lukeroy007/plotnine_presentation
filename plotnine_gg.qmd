@@ -130,7 +130,8 @@ To create a basic Plotnine visualization, we need to specify how raw data should
 from plotnine import ggplot, aes, geom_point
 
 # Basic scatter plot
-(ggplot(df, aes(x="crash_date", y="number_of_persons_injured")) + geom_point())
+(ggplot(df, aes(x="crash_date", y="number_of_persons_injured")) + 
+geom_point())
 
 # Breakdown of components:
 # ggplot = grammar of graphics plot
@@ -155,10 +156,12 @@ By applying a **statistical transformation** and changing the **geometry**, we c
 from plotnine import *
 
 # Aggregate injuries per day
-df_daily = df.groupby("crash_date").agg({"number_of_persons_injured": "sum"}).reset_index()
+df_daily = df.groupby("crash_date").agg
+({"number_of_persons_injured": "sum"}).reset_index()
 
 # Bar plot to show trends
-(ggplot(df_daily, aes(x="crash_date", y="number_of_persons_injured")) + geom_bar(stat="identity"))
+(ggplot(df_daily, aes(x="crash_date", 
+y="number_of_persons_injured")) + geom_bar(stat="identity"))
 
 # Using stat="identity" tells Plotnine to use our computed data without further aggregation
 
@@ -206,7 +209,8 @@ df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=d
 #| output-location: slide
 # Change X variable to day of the week instead of date
 
-(ggplot(df_weekly, aes(x="day_of_week", y="number_of_persons_injured")) + 
+(ggplot(df_weekly, aes(x="day_of_week", 
+y="number_of_persons_injured")) + 
  geom_bar(stat="identity"))
 
 
@@ -221,7 +225,8 @@ df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=d
 ```{python}
 #| output-location: slide
 
-(ggplot(df_weekly, aes(x="day_of_week", y="number_of_persons_injured", fill="day_of_week")) + 
+(ggplot(df_weekly, aes(x="day_of_week", 
+y="number_of_persons_injured", fill="day_of_week")) + 
  geom_bar(stat="identity") +
  scale_fill_brewer(type="qual", palette="Set1"))
 
@@ -240,9 +245,12 @@ df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=d
 
 # Bar plot of injuries per day of the week
 
-(ggplot(df_weekly, aes(x="day_of_week", y="number_of_persons_injured", fill="day_of_week")) + 
+(ggplot(df_weekly, aes(x="day_of_week", 
+y="number_of_persons_injured", fill="day_of_week")) + 
  geom_bar(stat="identity") +
- scale_fill_brewer(type="qual", palette="Set1") +labs(x="Days of the Week", y="Number of Injuries", title="Crash injuries reported for each weekday", fill="Days"))
+ scale_fill_brewer(type="qual", palette="Set1") +
+ labs(x="Days of the Week", y="Number of Injuries", 
+ title="Crash injuries reported for each weekday", fill="Days"))
 
 
 
@@ -259,7 +267,8 @@ df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=d
 #| output-location: slide
 #| echo: false
 
-(ggplot(df, aes(x="crash_date", y="number_of_persons_injured")) + geom_point())
+(ggplot(df, aes(x="crash_date", y="number_of_persons_injured")) + 
+geom_point())
 
 ```
 
@@ -271,9 +280,11 @@ df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=d
 
 # pro level visualization
 
-(ggplot(df_weekly, aes(x="day_of_week", y="number_of_persons_injured", fill="day_of_week")) + 
+(ggplot(df_weekly, aes(x="day_of_week", 
+y="number_of_persons_injured", fill="day_of_week")) + 
  geom_bar(stat="identity") +
- scale_fill_hue() +labs(x="Days of the Week", y="Number of Injuries", title="Crash injuries reported for each weekday", fill="Days") + theme_gray())
+ scale_fill_hue() +labs(x="Days of the Week", y="Number of Injuries", 
+ title="Crash injuries reported for each weekday", fill="Days") + theme_gray())
 
 #theme_gray is the default theme, I explicitly defined it to show formatting
 
@@ -333,7 +344,8 @@ df_borough["day_of_week"] = pd.Categorical(df_borough["day_of_week"], categories
 ```{python}
 #| output-location: slide
 
-(ggplot(df_borough, aes(x="day_of_week", y="number_of_persons_injured", fill="day_of_week")) + 
+(ggplot(df_borough, aes(x="day_of_week", 
+y="number_of_persons_injured", fill="day_of_week")) + 
  geom_bar(stat="identity") +
  facet_wrap("~borough") +  
  scale_fill_brewer(type="qual", palette="Set1") + 
