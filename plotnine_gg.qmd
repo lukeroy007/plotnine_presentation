@@ -8,6 +8,9 @@ format:
         code-block-bg: true
         code-copy: true
 
+        theme: simple
+        css: styles.css
+
 execute: 
   echo: true
 
