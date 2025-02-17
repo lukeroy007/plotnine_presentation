@@ -211,8 +211,7 @@ df_weekly["day_of_week"] = pd.Categorical(df_weekly["day_of_week"], categories=d
 #| code-overflow: wrap
 # Change X variable to day of the week instead of date
 
-(ggplot(df_weekly, aes(x="day_of_week", y="number_of_persons_injured")) + 
- geom_bar(stat="identity"))
+(ggplot(df_weekly, aes(x="day_of_week", y="number_of_persons_injured")) + geom_bar(stat="identity"))
 
 
 ```
