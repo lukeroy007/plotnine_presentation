@@ -114,17 +114,16 @@ df.head()
 
 ```
 
-break
 
 ## Step 2 - Creating a Basic Grammar of Graphics Plot  
----
+
 
 Plotnine syntax is structured **like a mathematical formula**—you define the **Grammar of Graphics components** and combine them using the **`+` operator**.  
 
 To create a basic Plotnine visualization, we need to specify how raw data should be translated into graphical elements.  
 ---
 
-```{python}
+```{python, layout: 'slide'}
 from plotnine import ggplot, aes, geom_point
 
 # Basic scatter plot
@@ -137,8 +136,10 @@ from plotnine import ggplot, aes, geom_point
 # geom_point = geometry (no argument creates a scatterplot)
 ```
 
+(ggplot(df, aes(x="crash_date", y="number_of_persons_injured")) + geom_point())
+
 ## Step 3 - Fitting the Grammar of Graphics to Our Data  
----
+
 
 Plotnine offers many options for visualizing data, and some are more **informative, helpful, and visually appealing** than others.  
 
