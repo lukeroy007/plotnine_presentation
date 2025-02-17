@@ -345,7 +345,7 @@ df_borough["day_of_week"] = pd.Categorical(df_borough["day_of_week"], categories
      title="Crash Injuries by Day of the Week in Each Borough", 
      fill="Days"
  ) +
- theme_light()+ theme(axis_text_x=element_blank())) 
+ theme_light()+ theme(axis_text_x=element_blank()) + theme(axis_text_y=element_blank())) 
 
 
 
