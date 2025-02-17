@@ -357,7 +357,7 @@ df_borough["day_of_week"] = pd.Categorical(df_borough["day_of_week"], categories
 
 Plotnine is a powerful grammar of graphics based visualization tool.
 
-With it you can create beautiful, informative and profession looking plots.
+With it you can create beautiful, informative and professional looking plots.
 
 Thank you for listening to my presentation.
 
