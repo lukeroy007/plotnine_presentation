@@ -134,7 +134,8 @@ To create a basic Plotnine visualization, we need to specify how raw data should
 from plotnine import ggplot, aes, geom_point
 
 # Basic scatter plot
-(ggplot(df, aes(x="crash_date", y="number_of_persons_injured")) + geom_point())
+(ggplot(df, aes(x="crash_date", y="number_of_persons_injured")) 
++ geom_point())
 
 # Breakdown of components:
 # ggplot = grammar of graphics plot
