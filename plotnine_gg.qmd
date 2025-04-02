@@ -131,17 +131,18 @@ To create a basic Plotnine visualization, we need to specify how raw data should
 ```{python}
 #| output-location: slide
 
-from plotnine import ggplot, aes, geom_point
+from plotnine import ggplot, aes, geom_jitter
 
 # Basic scatter plot
 (ggplot(df, aes(x="crash_date", y="number_of_persons_injured")) 
-+ geom_point())
++ geom_jitter(width=0.3, height=0.3))
 
 # Breakdown of components:
 # ggplot = grammar of graphics plot
 # df = our data
 # aes = aesthetics
 # geom_point = geometry (no argument creates a scatterplot)
+# geom_jitter = geometry (jittered scatterplot to show overlap)
 ```
 
 
@@ -321,6 +322,9 @@ df_borough["number_of_persons_injured"] = df_borough.apply(
 day_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 df_borough["day_of_week"] = pd.Categorical(df_borough["day_of_week"], categories=day_order, ordered=True)
 
+# Create day and night
+df["crash_time"] = pd.to_datetime(df["crash_time"], format="%H:%M").dt.hour
+df["time_of_day"] = df["crash_time"].apply(lambda h: "Day" if 6 <= h < 18 else "Night")
 
 
 
@@ -352,6 +356,24 @@ df_borough["day_of_week"] = pd.Categorical(df_borough["day_of_week"], categories
 
 ```
 
+Here we demonstrate a two factor facet, splitting cases
+occuring in the daytime, and at night.
+```{python}
+#| output-location: slide
+#| echo: true
+
+from plotnine import *
+
+(ggplot(df, aes(x="day_of_week", y="number_of_persons_injured", fill="day_of_week")) + 
+ geom_bar(stat="identity") +
+ facet_grid("borough ~ time_of_day") +  # Rows = borough, Columns = time of day
+ scale_fill_brewer(type="qual", palette="Set1") +
+ theme_light()) + theme(axis_text_x=element_blank())
+
+
+
+
+```
 
 ## Conclusion - Plotnine and Grammar of Graphics
 
