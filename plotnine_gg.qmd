@@ -260,7 +260,7 @@ y="number_of_persons_injured", fill="day_of_week"))
 
 ```{python}
 #| output-location: slide
-
+#| echo: false
 # Bar plot of injuries per day of the week
 (
     ggplot(
